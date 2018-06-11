@@ -1,0 +1,54 @@
+Final traffic raspberry code : #Basic traffic system model to analyse approach of an object 
+
+import time                         
+import RPi.GPIO as IO 
+IO.setmode(IO.BOARD)            # Use board numbering pin 
+IO.setwarnings(False)
+#Red  --- R and 11
+#Yellow --- Y and 13
+#Green --- G and 15
+#Ir ---- I and 12
+
+IO.setup(11,IO.OUT)
+IO.setup(13,IO.OUT)
+IO.setup(15,IO.OUT)
+IO.setup(12,IO.IN) 
+
+# sleep time 
+
+""" R = 0 
+Y = 0 
+G = 0 """ 
+
+while(True) :
+
+	if(IO.input(12) == True) :
+		traffic_1() 
+	else :
+		traffic_2()
+
+traffic_1() : 
+
+	IO.output(15,True) 
+	time.sleep(10)
+	IO.output(15,False)
+	IO.output(13,True)
+	time.sleep(2)
+	IO.output(13,False)
+	IO.output(11,True)
+	time.sleep(8) 
+	IO.output(11,False)
+
+traffic_2() :
+
+	
+	IO.output(11,True) 
+	time.sleep(20)
+	IO.output(11,False)
+	IO.output(13,True)
+	time.sleep(0)
+	IO.output(13,False)
+	IO.output(15,True)
+	time.sleep(0) 
+	IO.output(15,False)
+		
